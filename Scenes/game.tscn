@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bbkwi8g1lv4g5"]
+
+[ext_resource type="Script" uid="uid://dr12n7s0ip2vg" path="res://Scripts/game.gd" id="1_3dryh"]
+[ext_resource type="PackedScene" uid="uid://enka6wakk8k7" path="res://Scenes/bird.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://d3uac7wjorfa8" path="res://Scenes/pipes.tscn" id="3_wrm1d"]
+[ext_resource type="AudioStream" uid="uid://dyiosn4k6j3u5" path="res://Assets/Sound/sfx_hit.wav" id="4_wowpa"]
+[ext_resource type="AudioStream" uid="uid://bvo4dh36yv7jo" path="res://Assets/Sound/sfx_die.wav" id="5_i6g32"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_1l0tm"]
+loop = false
+stream_count = 2
+stream_0 = ExtResource("4_wowpa")
+stream_1 = ExtResource("5_i6g32")
+
+[node name="Game" type="Node2D" unique_id=304029775]
+script = ExtResource("1_3dryh")
+pipe = ExtResource("3_wrm1d")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1884719724]
+
+[node name="Bird" parent="." unique_id=311644262 instance=ExtResource("1_ebmjs")]
+
+[node name="Timer" type="Timer" parent="." unique_id=911167887]
+wait_time = 3.0
+autostart = true
+
+[node name="Score" type="Label" parent="." unique_id=692373262]
+offset_left = -573.0
+offset_top = -321.0
+offset_right = -251.0
+offset_bottom = -238.0
+theme_override_font_sizes/font_size = 60
+text = "0"
+
+[node name="GameOver" type="Label" parent="." unique_id=563504928]
+visible = false
+offset_left = -162.0
+offset_top = -38.0
+offset_right = 168.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 58
+text = " Game Over"
+
+[node name="GameSounds" type="AudioStreamPlayer2D" parent="." unique_id=1521056448]
+stream = SubResource("AudioStreamPlaylist_1l0tm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=578615463]
+
+[connection signal="body_entered" from="Bird" to="." method="_on_bird_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

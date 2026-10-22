@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://enka6wakk8k7"]
+
+[ext_resource type="Script" uid="uid://in46h5wl72vn" path="res://Scripts/bird.gd" id="1_mcegt"]
+[ext_resource type="Texture2D" uid="uid://dd2bh77ovwbqf" path="res://Assets/Sprites/unitytut-birdbody.png" id="2_dnvpi"]
+[ext_resource type="AudioStream" uid="uid://qstvtlml0mkc" path="res://Assets/Sound/sfx_wing.wav" id="3_dnvpi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ebmjs"]
+radius = 42.953465
+
+[node name="Bird" type="RigidBody2D" unique_id=1109214774]
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_mcegt")
+flap_power = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1982406900]
+position = Vector2(-1, 9)
+shape = SubResource("CircleShape2D_ebmjs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2037064433]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_dnvpi")
+
+[node name="FlapSound" type="AudioStreamPlayer2D" parent="." unique_id=1883518900]
+stream = ExtResource("3_dnvpi")

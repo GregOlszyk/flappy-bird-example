@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://d3uac7wjorfa8"]
+
+[ext_resource type="Script" uid="uid://b45o0ibi5bf4i" path="res://Scripts/pipes.gd" id="1_7ktcp"]
+[ext_resource type="Texture2D" uid="uid://bfnvg8v83v1hh" path="res://Assets/Sprites/unitytut-pipe.png" id="2_ws3sl"]
+[ext_resource type="AudioStream" uid="uid://bm7ofufgt1k7g" path="res://Assets/Sound/sfx_point.wav" id="3_ws3sl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrm1d"]
+size = Vector2(113, 535)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ktcp"]
+
+[node name="Pipes" type="Node2D" unique_id=1829679012]
+script = ExtResource("1_7ktcp")
+move_speed = 150
+
+[node name="Top Pipe" type="StaticBody2D" parent="." unique_id=697228936 groups=["hit"]]
+position = Vector2(0, -450)
+
+[node name="Sprite2D" type="Sprite2D" parent="Top Pipe" unique_id=248199649]
+scale = Vector2(0.245, 0.245)
+texture = ExtResource("2_ws3sl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top Pipe" unique_id=1931479602]
+position = Vector2(-0.5, -1.5)
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="Bottom Pipe" type="StaticBody2D" parent="." unique_id=2005527758 groups=["hit"]]
+position = Vector2(0, 450)
+rotation = 3.1415927
+
+[node name="Sprite2D" type="Sprite2D" parent="Bottom Pipe" unique_id=1166532256]
+scale = Vector2(0.245, 0.245)
+texture = ExtResource("2_ws3sl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom Pipe" unique_id=332986070]
+position = Vector2(-0.5, -1.5)
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="Score Box" type="Area2D" parent="." unique_id=1740494186 groups=["score_box"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score Box" unique_id=733581638]
+scale = Vector2(5.44, 18.119999)
+shape = SubResource("RectangleShape2D_7ktcp")
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="." unique_id=435281504]
+stream = ExtResource("3_ws3sl")
+
+[connection signal="body_entered" from="Score Box" to="." method="_on_score_box_body_entered"]
